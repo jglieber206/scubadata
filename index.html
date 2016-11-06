@@ -8,14 +8,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-  <form ng-controller="SearchController">
-    Domain: <input type="text" name="domain" id="domain">
-    Start date: <input type="date" name="startDate" id="startDate">
-    End date: <input type="date" name="endDate" id="endDate">
-    Depth of Search <input type="number" name="depthOfSearch" id="depthOfSearch">
-    <input type="submit" id="submitSearch">
+  <form ng-controller="SearchController" ng-submit="search()">
+    Domain: <input type="text" ng-model="text" name="domain" id="domain">
+    Start date: <input type="date" ng-model="date" name="startDate" id="startDate">
+    End date: <input type="date" ng-model="date" name="endDate" id="endDate">
+    Depth of Search <input type="number" ng-model="number" name="depthOfSearch" id="depthOfSearch">
+    <input type="submit" id="submitSearch" value="submit">
   </form>
 
+  <p>search submitted: <br> {{query}}
   <div ng-controller="ProgressController as progress">
     <div ng-show-"">
       <h3>Progress:</h3>

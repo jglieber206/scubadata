@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body ng-app="submitExample">
+  <form ng-submit="submit()" ng-controller="ExampleController">
+    Enter text and hit enter:
+    <input type="text" ng-model="fields.text" name="text" />
+    <input type="date" ng-model="fields.date" name="date" />
+    <input type="submit" id="submit" value="Submit" />
+    <pre>list={{fields.text}} {{fields.date}}</pre>
+  </form>
+  <script>
+    angular.module('submitExample', [])
+      .controller('ExampleController', ['$scope', function($scope, $http) {
+        $scope.submit = function() {
+          var data = $scope.fields;
+          $http.post(data);
+        };
+      }]);
+  </script>
+
+
+</body>

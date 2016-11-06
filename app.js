@@ -8,6 +8,12 @@
     var startDate = document.getElementById("startDate");
     var endDate = document.getElementById("endDate");
     var depthOfSearch = document.getElementById("depth");
+    $scope.list = [];
+    $scope.submit = function() {
+      if($scope.domain) {
+        $scope.list.push(this.domain);
+      }
+    }
     // $scope.products = apiCall;
   });
 
