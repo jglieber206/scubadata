@@ -8,6 +8,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
+  <script type="text/javascript">
+    var domain = document.getElementById("domain");
+    var startDate = document.getElementById("startDate");
+    var endDate = document.getElementById("endDate");
+    var depthOfSearch = document.getElementById("depth");
+    $scope.list = [];
+    $scope.submit = function() {
+      if($scope.domain) {
+        $scope.list.push(this.domain);
+      }
+    }
+
+  </script>
+
   <form ng-controller="SearchController" ng-submit="search()">
     Domain: <input type="text" ng-model="text" name="domain" id="domain">
     Start date: <input type="date" ng-model="date" name="startDate" id="startDate">

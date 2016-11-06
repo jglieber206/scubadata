@@ -8,18 +8,59 @@
 </head>
 <body ng-app="submitExample">
   <form ng-submit="submit()" ng-controller="ExampleController">
-    Enter text and hit enter:
-    <input type="text" ng-model="fields.text" name="text" />
-    <input type="date" ng-model="fields.date" name="date" />
-    <input type="submit" id="submit" value="Submit" />
-    <pre>list={{fields.text}} {{fields.date}}</pre>
+    Domain: <input type="text" ng-model="text" name="domain" id="domain">
+    Start date: <input type="date" ng-model="date" name="startDate" id="startDate">
+    End date: <input type="date" ng-model="date" name="endDate" id="endDate">
+    Depth of Search <input type="number" ng-model="number" name="depthOfSearch" id="depthOfSearch">
+    <input type="submit" id="submitSearch" value="submit">
   </form>
   <script>
     angular.module('submitExample', [])
-      .controller('ExampleController', ['$scope', function($scope, $http) {
+      .controller('ExampleController', ['$scope', '$http', function($scope, $http) {
+
+        $scope.searches = [{
+                            'domain' : 'nytimes.com',
+                            'startDate' : '01/01/2000',
+                            'endDate' : '01/01/2001',
+                            'depth' : 2
+                          },
+                          {
+                            'domain' : 'nytimes.com',
+                            'startDate' : '01/01/2016',
+                            'endDate' : '01/01/2017',
+                            'depth' : 2
+                          }];
+        $scope.addRowToJSON = function() {
+          $scope.searches.push({'domain':$scope.domain, 'startDate':$scope.startDate, 'endDate':$scope.endDate, 'depth':$scope.depth});
+          var dataObj = {
+            domain : $scope.domain,
+            startDate : $scope.startDate,
+            endDate : $scope.endDate,
+            depth : $scope.depth
+          };
+          var res = $http.post('/search_json', dataObj);
+          res.success(function(data, status, headers, config) {
+            $scope.message = data;
+          });
+          res.error(function(data, status, headers, config) {
+            alert("failure message: " + JSON.stringify({data: data}));
+          });
+          $scope.domain = '';
+          $scope.startDate = '';
+          $scope.endDate = '';
+          $scope.depth = '';
+
+        }
+
+
+        $scope.mysearch = {};
+        $scope.addSearch = function() {
+          $scope.
+        }
         $scope.submit = function() {
+          $scope
           var data = $scope.fields;
-          $http.post(data);
+          // $http.post(data);
         };
       }]);
   </script>
