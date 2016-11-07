@@ -1,45 +1,45 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script type="text/javascript" src="app.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
-<body>
-  <script type="text/javascript">
-    var domain = document.getElementById("domain");
-    var startDate = document.getElementById("startDate");
-    var endDate = document.getElementById("endDate");
-    var depthOfSearch = document.getElementById("depth");
-    $scope.list = [];
-    $scope.submit = function() {
-      if($scope.domain) {
-        $scope.list.push(this.domain);
-      }
-    }
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
 
-  </script>
+        <h1> ScubaData</h1>
+        <form name="wordList" action="result.html" onsubmit="return storeVariable();">
+            URL: <br>
+            <input type="text" id="url"> <br>
+            Start Date: <br>
+            <input type="text" id="startDate"> <br>            
+            End Date: <br>
+            <input type="text" id="endDate"> <br>
+            Keyword: <br>
+            <input type="text" id="keyword"> <br>
+            Depth of Search: <br>
+            <input type="text" id="depthOfSearch"> <br>
+            
+            <input type="submit" value="Submit">
+        </form>
+        
+        
+        
+    </body>
 
-  <form ng-controller="SearchController" ng-submit="search()">
-    Domain: <input type="text" ng-model="text" name="domain" id="domain">
-    Start date: <input type="date" ng-model="date" name="startDate" id="startDate">
-    End date: <input type="date" ng-model="date" name="endDate" id="endDate">
-    Depth of Search <input type="number" ng-model="number" name="depthOfSearch" id="depthOfSearch">
-    <input type="submit" id="submitSearch" value="submit">
-  </form>
+    <script>
+        function storeVariable() {
 
-  <p>search submitted: <br> {{query}}
-  <div ng-controller="ProgressController as progress">
-    <div ng-show-"">
-      <h3>Progress:</h3>
-      <p ng-repeat="article in progress.urls"> {{article.articleTitle}} </p>
-    </div>
-  </div>
+            sessionStorage.setItem("URL", document.getElementById("url").value);
 
-</body>
+            sessionStorage.setItem("START", document.getElementById("startDate").value);
 
+            sessionStorage.setItem("END", document.getElementById("endDate").value);
 
+            sessionStorage.setItem("KEYWORD", document.getElementById("keyword").value);
+
+            sessionStorage.setItem("DEPTH", document.getElementById("depth of Search").value);
+
+            return true;
+        }
+        
+    </script>
 
 </html>
