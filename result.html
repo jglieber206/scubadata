@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="result"> </div>
+
+        <script>
+            document.getElementById("result").innerHTML = "URL: "
+                    + sessionStorage.getItem("URL") + " Start Date: "
+                    + sessionStorage.getItem("START") + " End Date: "
+                    + sessionStorage.getItem("END") + " Keyword: "
+                    + sessionStorage.getItem("KEYWORD") + " Depth of Search: "
+                    + sessionStorage.getItem("DEPTH");
+
+        </script>
+    </body>
+</html>
