@@ -3,67 +3,42 @@
 <head>
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
-<body ng-app="submitExample">
-  <form ng-submit="submit()" ng-controller="ExampleController">
-    Domain: <input type="text" ng-model="text" name="domain" id="domain">
-    Start date: <input type="date" ng-model="date" name="startDate" id="startDate">
-    End date: <input type="date" ng-model="date" name="endDate" id="endDate">
-    Depth of Search <input type="number" ng-model="number" name="depthOfSearch" id="depthOfSearch">
-    <input type="submit" id="submitSearch" value="submit">
+<body>
+  <h1> ScubaData</h1>
+  <form name="wordList" action="result.html" onsubmit="return storeVariable();">
+      URL: <br>
+      <input type="text" id="url"> <br>
+      Start Date: <br>
+      <input type="date" id="startDate"> <br>
+      End Date: <br>
+      <input type="date" id="endDate"> <br>
+      Keyword: <br>
+      <input type="text" id="keyword"> <br>
+      Depth of Search: <br>
+      <input type="number" id="depthOfSearch"> <br>
+      <input type="submit" value="Submit">
   </form>
-  <script>
-    angular.module('submitExample', [])
-      .controller('ExampleController', ['$scope', '$http', function($scope, $http) {
 
-        $scope.searches = [{
-                            'domain' : 'nytimes.com',
-                            'startDate' : '01/01/2000',
-                            'endDate' : '01/01/2001',
-                            'depth' : 2
-                          },
-                          {
-                            'domain' : 'nytimes.com',
-                            'startDate' : '01/01/2016',
-                            'endDate' : '01/01/2017',
-                            'depth' : 2
-                          }];
-        $scope.addRowToJSON = function() {
-          $scope.searches.push({'domain':$scope.domain, 'startDate':$scope.startDate, 'endDate':$scope.endDate, 'depth':$scope.depth});
-          var dataObj = {
-            domain : $scope.domain,
-            startDate : $scope.startDate,
-            endDate : $scope.endDate,
-            depth : $scope.depth
-          };
-          var res = $http.post('/search_json', dataObj);
-          res.success(function(data, status, headers, config) {
-            $scope.message = data;
-          });
-          res.error(function(data, status, headers, config) {
-            alert("failure message: " + JSON.stringify({data: data}));
-          });
-          $scope.domain = '';
-          $scope.startDate = '';
-          $scope.endDate = '';
-          $scope.depth = '';
-
-        }
-
-
-        $scope.mysearch = {};
-        $scope.addSearch = function() {
-          $scope.
-        }
-        $scope.submit = function() {
-          $scope
-          var data = $scope.fields;
-          // $http.post(data);
-        };
-      }]);
-  </script>
 
 
 </body>
+
+<script>
+  function storeVariable() {
+    sessionStorage.setItem("URL", document.getElementById("url").value);
+    sessionStorage.setItem("START", document.getElementById("startDate").value.toString().replace('-',''));
+    sessionStorage.setItem("END", document.getElementById("endDate").value.toString().replaceAll("-", ""));
+    sessionStorage.setItem("KEYWORD", document.getElementById("keyword").value);
+    sessionStorage.setItem("DEPTH", document.getElementById("depthOfSearch").value);
+    return true;
+  }
+  function getJson() {
+    var myJSON = JSON.stringify({'url': document.getElementById("url"), 'startDate': document.getElementById("startDate").value, 'endDate': document.getElementById("endDate").value, 'keyword': document.getElementById("keyword").value, 'depth': document.getElementById("depth").value});
+    return myJSON;
+  }
+
+</script>
