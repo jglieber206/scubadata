@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div id="query"> </div>
+  <div id="test"> </div>
+  <script>
+    document.getElementById("query").innerHTML = "URL: "
+      + sessionStorage.getItem("URL") + "<br>Start Date: "
+      + sessionStorage.getItem("START") + "<br>End Date: "
+      + sessionStorage.getItem("END") + "<br>Keyword: "
+      + sessionStorage.getItem("KEYWORD") + "<br>Depth of search: "
+      + sessionStorage.getItem("DEPTH");
+    var myJSON = JSON.stringify({
+        'url': sessionStorage.getItem("URL"),
+        'startDate': sessionStorage.getItem("START"),
+        'endDate': sessionStorage.getItem("END"),
+        'keyword': sessionStorage.getItem("KEYWORD"),
+        'depth': sessionStorage.getItem("DEPTH")});
+    function getJson() {
+        return myJSON;
+    }
+    document.getElementById("test").innerHTML = getJson();
+  </script>
+</body>
+</html>
