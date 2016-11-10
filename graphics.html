@@ -44,7 +44,7 @@
 
     var y = d3.scale.linear().range([height, 0]);
 
-    // define the axis
+    // axis 
     var xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
@@ -56,7 +56,7 @@
             .ticks(10);
 
 
-    // add the SVG element
+   
     var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -65,7 +65,7 @@
                     "translate(" + margin.left + "," + margin.top + ")");
 
 
-    // load the data
+    // data
     d3.json("package.json", function(error, data) {
 
         data.forEach(function(d) {
@@ -73,11 +73,11 @@
             d.Freq = +d.Freq;
         });
 
-        // scale the range of the data
+      
         x.domain(data.map(function(d) { return d.word; }));
         y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
-        // add axis
+        // axis
         svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + height + ")")
