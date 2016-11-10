@@ -1,0 +1,18 @@
+// Built by LucyBot. www.lucybot.com
+var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+url += '?' + $.param({
+  'api-key': "7187b74804ff4300b1e29e8bf330e14b",
+  'q': "hillary",
+  'begin_date': "20161107",
+  'end_date': "20161108",
+  'sort': "oldest",
+  'fl': "web_url"
+});
+$.ajax({
+  url: url,
+  method: 'GET',
+}).done(function(result) {
+  console.log(result);
+}).fail(function(err) {
+  throw err;
+});
