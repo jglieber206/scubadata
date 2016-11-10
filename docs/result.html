@@ -2,27 +2,68 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <script type="text/javascript" src="nytAPI.js"></script>
 </head>
 <body>
   <div id="query"> </div>
   <div id="test"> </div>
-  <script>
-    document.getElementById("query").innerHTML = "URL: "
-      + sessionStorage.getItem("URL") + "<br>Start Date: "
-      + sessionStorage.getItem("START") + "<br>End Date: "
-      + sessionStorage.getItem("END") + "<br>Keyword: "
-      + sessionStorage.getItem("KEYWORD") + "<br>Depth of search: "
-      + sessionStorage.getItem("DEPTH");
-    var myJSON = JSON.stringify({
-        'url': sessionStorage.getItem("URL"),
-        'startDate': sessionStorage.getItem("START"),
-        'endDate': sessionStorage.getItem("END"),
-        'keyword': sessionStorage.getItem("KEYWORD"),
-        'depth': sessionStorage.getItem("DEPTH")});
-    function getJson() {
-        return myJSON;
-    }
-    document.getElementById("test").innerHTML = getJson();
-  </script>
 </body>
+<script>
+  document.getElementById("query").innerHTML = "URL: "
+    + sessionStorage.getItem("URL") + "<br>Start Date: "
+    + sessionStorage.getItem("START") + "<br>End Date: "
+    + sessionStorage.getItem("END") + "<br>Keyword: "
+    + sessionStorage.getItem("KEYWORD") + "<br>Depth of search: "
+    + sessionStorage.getItem("DEPTH");
+  var searchJSON = JSON.stringify({
+    'url': sessionStorage.getItem("URL"),
+    'startDate': sessionStorage.getItem("START"),
+    'endDate': sessionStorage.getItem("END"),
+    'keyword': sessionStorage.getItem("KEYWORD"),
+    'depth': sessionStorage.getItem("DEPTH")});
+  function getSearch() {
+    return searchJSON;
+  }
+  document.getElementById("test").innerHTML = getURLs();
+  function getURLs() {
+    var beginDate = 20160901;
+    var endDate = 20161110;
+    var dateDiff = endDate - beginDate;
+
+    while (endDate - beginDate != 0) {
+      if (dateDiff < 29) {
+      request.get({
+      url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+      qs: {
+        'api-key': "7187b74804ff4300b1e29e8bf330e14b",
+        'q': "hillary",
+        'begin_date': beginDate,
+        'end_date': beginDate,
+        'fl': "web_url",
+        //'hl': "true"
+      },
+
+      }, function(err, response, docs) {
+          jsonfile.writeFile(file, docs, function(err) {
+          console.error(err)
+        })
+
+        //console.log(docs);
+
+      })
+      beginDate ++;
+
+      } else {
+        console.log("only same month supported");
+        dateDiff = 0;
+      }
+    }
+    jsonfile.readFile(file, function(err, obj) {
+      var resultJSON = obj;
+
+      console.log(obj);
+    })
+    return resultJSON;
+  }
+</script>
 </html>
