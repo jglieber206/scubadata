@@ -33,13 +33,13 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <script>
-    // set the dimensions of the canvas
+    // dimensions
     var margin = {top: 20, right: 20, bottom: 70, left: 40},
             width = 600 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
 
 
-    // set the ranges
+    // ranges
     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
     var y = d3.scale.linear().range([height, 0]);
